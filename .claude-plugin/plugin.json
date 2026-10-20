@@ -1,0 +1,10 @@
+{
+  "name": "flintlock",
+  "version": "0.1.0",
+  "description": "After each task, sends Claude back once to look for duplicated logic in what it changed and extract it on the second copy.",
+  "author": { "name": "Hwaryuh" },
+  "homepage": "https://github.com/Hwaryuh/flintlock",
+  "repository": "https://github.com/Hwaryuh/flintlock",
+  "license": "MIT",
+  "keywords": ["refactor", "duplication", "stop-hook", "skill"]
+}
