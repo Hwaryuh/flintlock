@@ -1,6 +1,6 @@
 ---
 name: refactor-check
-description: Before reporting finished work, check the code you just changed for logic that already exists elsewhere in the repository, and extract it when this is the second copy. Use when the flintlock Stop hook asks for a refactor check, or when the user asks to look for duplication in recent changes.
+description: Before reporting finished work, check the code you just changed for logic that already exists elsewhere in the repository, and extract it when this is the second copy; suggest (never apply) structural fixes. Use when the flintlock Stop hook asks for a refactor check, or when the user asks to look for duplication in recent changes.
 ---
 
 # Refactor check
@@ -34,7 +34,19 @@ and not later (by the third copy it has already drifted).
    project and run the tests that cover the touched code. They must pass as they did before.
    If they fail, fix the extraction or revert it.
 
-5. **Report in one line** in your final answer: what you extracted and where, or, only if you
-   changed nothing, that you searched and found no duplicate. For example:
+5. **Note structure, do not change it.** While reading the changed code, you may notice a
+   structural problem it created or made worse. Examples: a function that now does two separate jobs,
+   a parameter list or nesting that keeps growing, code that your change left unused, or logic placed
+   in a module that does not own the concept. Do not fix these here. A structural change is a
+   decision for the user, and it belongs in its own diff. Suggest at most two, and only problems
+   you can point to in the changed code. Skip this step if nothing stands out.
+
+6. **Report** in your final answer:
+   - One line: what you extracted and where, or, only if you changed nothing, that you searched
+     and found no duplicate.
+   - Optionally, one line per structural suggestion from step 5: what, where and why.
+
+   For example:
    - `Refactor check: extracted clamp_to_range() from orders.py and invoices.py into money.py.`
    - `Refactor check: searched for duplicates of the new parsing code, found none.`
+   - `Suggestion: load_config() in app.py now parses and validates; split validate_config() out.`

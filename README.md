@@ -32,6 +32,9 @@ The `Stop` hook (`hooks/refactor-check.sh`) runs each time Claude finishes a tur
 The skill (`skills/refactor-check/SKILL.md`) is the procedure: for each changed function or block,
 search the repository for the same logic. If this is the second copy, extract it. Keep behaviour
 and passing tests. Then report one line about what was extracted, or that nothing was found.
+If the change created a structural problem, such as a function that now does two jobs or code
+left unused, Claude adds up to two one-line suggestions. It does not apply them: structural
+changes are your call and belong in their own diff.
 You can also run it by hand with `/flintlock:refactor-check`.
 
 The check costs one extra turn per change set. A turn that only answers a question does not
