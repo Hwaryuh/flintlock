@@ -64,7 +64,7 @@ check() {
 
   count=$(printf '%s\n' "$files" | wc -l | tr -d ' ')
   {
-    echo "Refactor check: before you report, follow the flintlock:refactor-check skill for the changes below."
+    echo "Refactor check: before you report, follow the refactor-check skill (flintlock:refactor-check in Claude Code) for the changes below."
     echo "Changed files ($count):"
     printf '%s\n' "$files" | head -n 30 | sed 's/^/- /'
     [ "$count" -gt 30 ] && echo "- ... and $((count - 30)) more (git status)"

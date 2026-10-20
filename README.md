@@ -12,6 +12,11 @@ claude plugin install flintlock --marketplace Hwaryuh/flintlock
 
 Or inside a session: `/plugin marketplace add Hwaryuh/flintlock`, then `/plugin install flintlock@flintlock`.
 
+Codex CLI (untested): Codex reads Claude plugin manifests and hooks, so the same repository
+should work there. Run `codex plugin marketplace add Hwaryuh/flintlock` and
+`codex plugin add flintlock@flintlock`. Then open `codex`, run `/hooks`, and trust the Stop hook.
+Codex does not run plugin hooks until you trust them.
+
 Requirements: `git`, and a POSIX `sh`. macOS and Linux have both. On Windows, install
 [Git for Windows](https://git-scm.com/download/win), which includes Git Bash. Claude Code already
 uses Git Bash for hooks when it is installed.
