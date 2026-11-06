@@ -23,11 +23,15 @@ uses Git Bash for hooks when it is installed.
 
 ## How it works
 
-The `Stop` hook (`hooks/refactor-check.sh`) runs each time Claude finishes a turn:
+A `UserPromptSubmit` hook (`hooks/refactor-check.sh snapshot`) records the change set when a turn
+starts, in `.git/flintlock-turn-<session id>`. The `Stop` hook (`hooks/refactor-check.sh`) runs each
+time Claude finishes a turn:
 
 - It passes when the project is not a git repository, when nothing changed against `HEAD`
   (tracked changes and untracked files), or when only docs and config changed
   (`*.md`, `*.txt`, `*.json`, `*.yaml`, `*.toml`, lock files, images and similar).
+- It passes when the change set is the same as at the start of the turn, so a question, a review
+  or an investigation never triggers it, even in a repository that was already dirty.
 - It passes when it already flagged this exact change set. It stores a hash of the change set in
   `.git/flintlock-refactor-check`. Nothing is written to your working tree.
 - It passes when Claude is already continuing because of a stop hook, so it never loops.
@@ -42,8 +46,8 @@ left unused, Claude adds up to two one-line suggestions. It does not apply them:
 changes are your call and belong in their own diff.
 You can also run it by hand with `/flintlock:refactor-check`.
 
-The check costs one extra turn per change set. A turn that only answers a question does not
-trigger it again, unless the files changed.
+The check costs one extra turn per change set. A turn that changes nothing does not trigger it.
+If you or another session edit files while Claude is working, Flintlock counts that as Claude's change.
 
 ## Turn it off
 
