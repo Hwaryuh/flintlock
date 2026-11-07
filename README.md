@@ -45,7 +45,9 @@ It also checks member placement: members Claude added, or whose access modifier 
 where the type's member order puts them. The order comes from the project's linter config or
 instructions first, then from the order the file already follows, then from a language default
 (C#: StyleCop kind and access order; Java: Checkstyle field order, related methods together;
-Kotlin: the official class layout, which does not order by visibility). Only those members move.
+Kotlin: the official class layout, which does not order by visibility; TypeScript: the
+typescript-eslint `member-ordering` default; JavaScript and others: the file's own order).
+Only those members move.
 Each moved existing member is named in the report with its modifier change, because a move hides
 that change in the diff.
 If the change created a structural problem, such as a function that now does two jobs or code

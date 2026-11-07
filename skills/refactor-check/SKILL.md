@@ -62,6 +62,15 @@ and not later (by the third copy it has already drifted).
         visibility: a changed modifier alone is no reason to move a member. Put a new function
         next to related code, keep overloads together, and keep the members of an implemented
         interface in the interface's order.
+      - **TypeScript** (typescript-eslint `member-ordering` default): index and call signatures,
+        fields, static blocks, constructors, accessors, getters, setters, methods. Within a kind:
+        `static`, then decorated, then instance, then `abstract`; within each of those, `public`,
+        `protected`, `private`, then `#private`. Keep a getter and its setter together when the
+        file already does.
+      - **JavaScript**: no common standard. Follow the class's existing order; if it has none,
+        leave placement alone.
+      - **Top-level declarations** (exported and local functions, constants) in any language:
+        the file's existing order. If it has none, leave placement alone.
       - **Other languages**: the type's existing order. If it has none, leave placement alone.
 
    Limits:
