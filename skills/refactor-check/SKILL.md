@@ -25,6 +25,11 @@ and not later (by the third copy it has already drifted).
    independent lines still count.
 
 3. **Decide.**
+   - The logic already exists as a function, type or constant you can call: replace your copy with
+     a call to it. Do not create a new one next to it, and do not wrap it in a function that only
+     forwards to it.
+   - It almost matches an existing function but not quite: do not bend that function to fit, such
+     as by adding a boolean or mode parameter. Leave both as they are, or suggest a change in step 6.
    - Same logic exists once elsewhere (yours is the second copy): extract it into one shared
      function, type or constant next to the code that owns the concept, and call it from both
      places.
