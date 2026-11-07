@@ -41,6 +41,13 @@ time Claude finishes a turn:
 The skill (`skills/refactor-check/SKILL.md`) is the procedure: for each changed function or block,
 search the repository for the same logic. If this is the second copy, extract it. Keep behaviour
 and passing tests. Then report one line about what was extracted, or that nothing was found.
+It also checks member placement: members Claude added, or whose access modifier it changed, go
+where the type's member order puts them. The order comes from the project's linter config or
+instructions first, then from the order the file already follows, then from a language default
+(C#: StyleCop kind and access order; Java: Checkstyle field order, related methods together;
+Kotlin: the official class layout, which does not order by visibility). Only those members move.
+Each moved existing member is named in the report with its modifier change, because a move hides
+that change in the diff.
 If the change created a structural problem, such as a function that now does two jobs or code
 left unused, Claude adds up to two one-line suggestions. It does not apply them: structural
 changes are your call and belong in their own diff.
